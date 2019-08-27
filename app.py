@@ -23,7 +23,7 @@ s.connect(("127.0.0.1", 1243))
 # Flask app should start in global layout
 app = Flask(__name__)
 
-appVersion = "EMMA alpha"
+appVersion = "EMMA alpha2"
 
 @app.route('/webhook', methods=['POST'])
 
