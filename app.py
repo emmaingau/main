@@ -12,7 +12,7 @@ import time
 import numpy
 import keyboard
 
-
+laza = "laza"
 HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
