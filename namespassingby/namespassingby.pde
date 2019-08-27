@@ -13,7 +13,7 @@ String whatClientSaid; // variable que venga de python
 
 void setup(){
   myServer = new Server(this, 1243, "127.0.0.1");
-  frameRate(60);
+  frameRate(30);
   background(12);
   size(600, 600);
   smooth();
@@ -24,7 +24,6 @@ void setup(){
 void draw(){
   Client thisClient = myServer.available();
   matrix(whatClientSaid);
-  theChosenOne(whatClientSaid);
   if (thisClient !=null) {
     whatClientSaid = thisClient.readString();
     println(whatClientSaid);
