@@ -97,9 +97,10 @@ def sportsFunction(req, action):
 
     response = replyList[(random.randrange(3))]
     print("Response is: " + response)
+    jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     
     #SSML response bitch!
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+2st'>"+ response +"</prosody></speak>"}]}}]}
+    #jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+2st'>"+ response +"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
