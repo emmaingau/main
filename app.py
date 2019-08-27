@@ -12,7 +12,6 @@ import time
 import numpy
 import keyboard
 
-laza = "laza"
 HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,7 +22,7 @@ s.connect(("127.0.0.1", 1243))
 # Flask app should start in global layout
 app = Flask(__name__)
 
-appVersion = "EMMA alpha2"
+appVersion = "EMMA alpha"
 
 @app.route('/webhook', methods=['POST'])
 

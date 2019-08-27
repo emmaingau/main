@@ -9,7 +9,7 @@ String [] names = {"AARON", "ABEL", "ABELARDO", "ABRAHAM", "ADALBERTO", "ADAN","
 
 int x = -10;
 int y = 0;
-String whatClientSaid="MARTIN"; // variable que venga de python
+String whatClientSaid; // variable que venga de python
 
 void setup(){
   myServer = new Server(this, 1243, "127.0.0.1");
@@ -23,12 +23,13 @@ void setup(){
 
 void draw(){
   Client thisClient = myServer.available();
+  matrix(whatClientSaid);
+  theChosenOne(whatClientSaid);
   if (thisClient !=null) {
     whatClientSaid = thisClient.readString();
     println(whatClientSaid);
   }
-  matrix(whatClientSaid);
-  theChosenOne(whatClientSaid);
+  
 }
 
 void matrix(String var) {
