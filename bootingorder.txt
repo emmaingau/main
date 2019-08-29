@@ -1,0 +1,19 @@
+BOOTING DEL MONSTRUO
+
+1) Abrir Anaconda Prompt (base) y hacer cd a la ruta de la carpeta "gassistant"
+
+2) Una vez en la carpeta gassistant, ejecutar la siguiente linea: python -m googlesamples.assistant.grpc.pushtotalk
+
+3) Prender server ngrok con "ngrok http 80 -subdomain emmaingau"
+
+4)(opcional) Una vez que prendió ngrok, podemos ir a 127.0.0.1:4040 (para monitoreo de solicitudes)
+
+5) Prender Processing 
+
+6) En otra ventana de Anaconda Prompt (base), hacer cd a la ruta de la carpeta "EmmaFlask"
+
+7) Una vez en la carpeta, ejecutar la siguiente línea: "app.py"
+
+
+NOTAS IMPORTANTES:
+Si se rompe todo o queremos reiniciar para hacer cambios, hay que parar processing y también darle Ctrl+C en la ventana de app.py y hacer los pasos 5, 6 y 7 de vuelta.

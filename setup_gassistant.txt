@@ -1,0 +1,21 @@
+https://drive.google.com/file/d/0B3CyrmGGhuIFRGQzZlREeE55bUk/view
+
+virtualenvironments --> https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
+
+py -m googlesamples.assistant.auth_helpers --
+client-secrets C:\Users\cpjag\Desktop\EmmaFlask\gassistant\client_secret_387946255816-9n58tqdcmjbgb7433daktrqci3r7tcaf.apps.googleusercontent.com.json
+
+
+google-oauthlib-tool --client-secrets C:\Users\cpjag\Desktop\EmmaFlask\gassistant\client_secret_387946255816-9n58tqdcmjbgb7433daktrqci3r7tcaf.apps.googleusercontent.com.json --scope https://www.googleapis.com/auth/assistant-sdk-prototype --save --headless
+
+
+C:\Users\cpjag\AppData\Roaming\google-oauthlib-tool\credentials.json
+
+
+https://troubleshooter.xyz/wiki/how-to-install-google-assistant-on-windows-10/
+
+lifewire google assistant on windows
+
+
+python -m googlesamples.assistant.grpc.pushtotalk
+

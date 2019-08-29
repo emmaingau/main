@@ -12,6 +12,7 @@ import time
 import numpy
 import keyboard
 
+
 HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -79,9 +80,9 @@ def namesFunction(req, action):
     print("Response is: " + response)
     
     #SSML response bitch!
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+1st'>"+ response +"</prosody></speak>"}]}}]}
+    #jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+1st'>"+ response +"</prosody></speak>"}]}}]}
 
-    #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
+    jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
 
 def sportsFunction(req, action):
@@ -96,10 +97,9 @@ def sportsFunction(req, action):
 
     response = replyList[(random.randrange(3))]
     print("Response is: " + response)
-    jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     
     #SSML response bitch!
-    #jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+2st'>"+ response +"</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+2st'>"+ response +"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
