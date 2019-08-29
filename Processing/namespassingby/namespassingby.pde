@@ -10,6 +10,7 @@ String [] names = {"AARON", "ABEL", "ABELARDO", "ABRAHAM", "ADALBERTO", "ADAN","
 int x = -10;
 int y = 0;
 String whatClientSaid; // variable que venga de python
+String joaco = "JOAQUIN";
 
 void setup(){
   myServer = new Server(this, 1243, "127.0.0.1");
@@ -23,10 +24,17 @@ void setup(){
 
 void draw(){
   Client thisClient = myServer.available();
-  matrix(whatClientSaid);
   if (thisClient !=null) {
     whatClientSaid = thisClient.readString();
     println(whatClientSaid);
+    for (int n=0;n<names.length;n++){
+      if ((String)whatClientSaid==joaco){
+        println("matrixforever");
+      }
+      else{
+        background(#FFFFFF);
+      }
+    }
   }
   
 }
