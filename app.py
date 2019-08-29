@@ -23,7 +23,7 @@ s.connect(("127.0.0.1", 1243))
 # Flask app should start in global layout
 app = Flask(__name__)
 
-appVersion = "EMMA alpha"
+appVersion = "EMMA alpha 0.2"
 
 @app.route('/webhook', methods=['POST'])
 
@@ -70,19 +70,23 @@ def namesFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
     value = parameter.get("names")
-    s.send(value.encode())
-    #f = open("replySports.txt", "r")
+    s.send(value.encode())  #te mando a Processing solo el valor importante
+    #f = open("replyNames.txt", "r")
     #replyList = f.readlines()
     #print(replyList)
     #f.close()
+    #response = replyList[(random.randrange(1))]
 
-    response = "Es un gusto " + value + ". Estoy acá porque vine a intentar entender cómo funcionan los humanos. Yo vengo de la galaxia Circinus. ¿La conoces?"
+    responseList = ["Es un gusto" + value + ". Estoy acá porque vine a intentar entender cómo funcionan los humanos, yo vengo de la galaxia Circinus la conoces?", 
+    "¿"+ value +"?¡Que nombre tan genial! Estoy acá porque vine a intentar entender  como piensan los humanos,yo vengo de la galaxia  Circinus la conoces?"]
+    response = responseList[(random.randrange(2))]
+
     print("Response is: " + response)
     
     #SSML response bitch!
-    #jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+1st'>"+ response +"</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
 
-    jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
+    #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
 
 def sportsFunction(req, action):
@@ -90,7 +94,7 @@ def sportsFunction(req, action):
     parameter = result.get("parameters")
     value = parameter.get("sportsName")
     s.send(value.encode())
-    f = open("replySports.txt", "r")
+    f = open("res/replylists/replySports.txt", "r")
     replyList = f.readlines()
     print(replyList)
     f.close()
@@ -99,7 +103,7 @@ def sportsFunction(req, action):
     print("Response is: " + response)
     
     #SSML response bitch!
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default' pitch='+2st'>"+ response +"</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
