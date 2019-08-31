@@ -77,13 +77,14 @@ def namesFunction(req, action):
     #f.close()
     #response = replyList[(random.randrange(1))]
 
-    responseList = ["Es un gusto" + value + ". Estoy acá porque vine a intentar entender cómo funcionan los humanos, yo vengo de la galaxia Circinus la conoces?", 
-    "¿"+ value +"?¡Que nombre tan genial! Estoy acá porque vine a intentar entender  como piensan los humanos,yo vengo de la galaxia  Circinus la conoces?"]
+    responseList = ["Es un gusto" + value + ". Estoy acá porque vine a intentar entender cómo funcionan los humanos. Yo vengo de la galaxia Circinus, la conocés?", 
+    "¿"+ value +"?¡Que nombre tan genial! Estoy acá porque vine a intentar entender  como piensan los humanos. Yo vengo de la galaxia  Circinus, la conocés?"]
     response = responseList[(random.randrange(2))]
 
     print("Response is: " + response)
     
     #SSML response bitch!
+    #jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
     jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
