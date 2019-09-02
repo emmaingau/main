@@ -11,6 +11,9 @@ import socket
 import time
 import numpy
 import keyboard
+from listas import fallbackList
+from listas import estacionesList
+
 
 
 HEADERSIZE = 10
@@ -61,6 +64,12 @@ def parameterEvaluator(req):
     elif action == "colorAction":
         finalReply = colorFunction(req, action)
         return(finalReply)
+    elif action == "estacionDeporteAction":
+        finalReply = sportsEstacionFunction(req, action)
+        return(finalReply)
+    elif action == "fallbackAction":
+        finalReply = fallbackFunction(req, action)
+        return(finalReply)
         
 
 
@@ -71,24 +80,18 @@ def namesFunction(req, action):
     parameter = result.get("parameters")
     value = parameter.get("names")
     s.send(value.encode())  #te mando a Processing solo el valor importante
-    #f = open("replyNames.txt", "r")
-    #replyList = f.readlines()
-    #print(replyList)
-    #f.close()
-    #response = replyList[(random.randrange(1))]
 
     responseList = ["Es un gusto" + value + ". Estoy acá porque vine a intentar entender cómo funcionan los humanos. Yo vengo de la galaxia Circinus, la conocés?", 
-    "¿"+ value +"?¡Que nombre tan genial! Estoy acá porque vine a intentar entender  como piensan los humanos. Yo vengo de la galaxia  Circinus, la conocés?"]
+    "¿"+ value +"?¡Que nombre tan genial! Estoy acá porque vine a intentar entender como piensan los humanos. Yo vengo de la galaxia  Circinus, la conocés?"]
     response = responseList[(random.randrange(2))]
 
     print("Response is: " + response)
     
-    #SSML response bitch!
-    #jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
     jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
+
 
 def sportsFunction(req, action):
     result = req.get("queryResult")
@@ -109,6 +112,29 @@ def sportsFunction(req, action):
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
 
+def sportsEstacionFunction(req, action):
+    result = req.get("queryResult")
+    parameter = result.get("parameters")
+    value = parameter.get("estacionName")
+    s.send(value.encode())
+    if value == "verano":
+        response = estacionesList[0]
+    elif value == "otoño":
+        response = estacionesList[1]
+    elif value == "invierno":
+        response = estacionesList[2]
+    elif value == "primavera":
+        response = estacionesList[3]
+
+    print("Response is: " + response)
+    
+    #SSML response bitch!
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
+
+    #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
+    return (jsonOut)
+
+
 
 def colorFunction(req, action):
     result = req.get("queryResult")
@@ -125,8 +151,12 @@ def colorFunction(req, action):
     jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
 
+def fallbackFunction(req, action):
+    response = fallbackList[random.randrange(3)]
+    print("Response is: " + response)
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+response+"</prosody></speak>"}]}}]}
 
-
+    return (jsonOut)
 
 	
 
