@@ -20,7 +20,7 @@ HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #s.connect((socket.gethostname(), 1243))
-s.connect(("127.0.0.1", 1243))
+s.connect(("127.0.0.1", 9000))
 
 
 # Flask app should start in global layout
@@ -79,7 +79,8 @@ def namesFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
     value = parameter.get("names")
-    s.send(value.encode())  #te mando a Processing solo el valor importante
+    dummy = "1 \n"
+    s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
 
     responseList = ["Es un gusto" + value + ". Estoy acá porque vine a intentar entender cómo funcionan los humanos. Yo vengo de la galaxia Circinus, la conocés?", 
     "¿"+ value +"?¡Que nombre tan genial! Estoy acá porque vine a intentar entender como piensan los humanos. Yo vengo de la galaxia  Circinus, la conocés?"]
@@ -140,7 +141,8 @@ def colorFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
     value = parameter.get("colorName")
-    s.send(value.encode())
+    dummy = "2 \n"
+    s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
     replyList = ["Respuesta custom para Color", 
                     "A mi también me gusta el "+ value, 
                     "Sabías que el color " + value + " significa alegría?"]
@@ -154,6 +156,8 @@ def colorFunction(req, action):
 def fallbackFunction(req, action):
     response = fallbackList[random.randrange(3)]
     print("Response is: " + response)
+    dummy = "0 \n"
+    s.send(dummy.encode())
     jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+response+"</prosody></speak>"}]}}]}
 
     return (jsonOut)
