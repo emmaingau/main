@@ -41,7 +41,7 @@ void setup(){
   
   
   // RELACIONADO CON SOCKETS
-  myServer = new Server(this, 1243, "127.0.0.1");
+  myServer = new Server(this, 9000, "127.0.0.1");
   
   // CONTADOR DE ÍNDICE -para los colores que son dos listas-
   
