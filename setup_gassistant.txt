@@ -2,19 +2,17 @@ https://drive.google.com/file/d/0B3CyrmGGhuIFRGQzZlREeE55bUk/view
 
 virtualenvironments --> https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 
-py -m googlesamples.assistant.auth_helpers --
-client-secrets C:\Users\cpjag\Desktop\EmmaFlask\gassistant\client_secret_387946255816-9n58tqdcmjbgb7433daktrqci3r7tcaf.apps.googleusercontent.com.json
-
+py -m googlesamples.assistant.auth_helpers --client-secrets C:\Users\reybo\Desktop\gassistant\387946255816-ef93lpc5htsd3ni4um0e89ugd58jhre6.apps.googleusercontent.com_secreto_cliente.json
 pip install --upgrade google-api-python-client
 
 pip install --upgrade google-auth-oauthlib[tool]
 
-google-oauthlib-tool --client-secrets C:\Users\cpjag\OneDrive\Escritorio\assistantmartin\client_secret_854101647180-stq8nj0p09rnji8mrff83vbg2icg0735.apps.googleusercontent.com.json --scope https://www.googleapis.com/auth/assistant-sdk-prototype --save --headless
+google-oauthlib-tool --client-secrets C:\Users\reybo\Desktop\gassistant\387946255816-ef93lpc5htsd3ni4um0e89ugd58jhre6.apps.googleusercontent.com_secreto_cliente.json --scope https://www.googleapis.com/auth/assistant-sdk-prototype --save --headless
 
 python -m googlesamples.assistant.grpc.pushtotalk
 
 
-
+googlesamples-assistant-pushtotalk -–project-id emmaingau -–device-model-id emmaingau-martinemma-nt6ime
 
 
 
@@ -25,6 +23,11 @@ Si hay problemas
 https://troubleshooter.xyz/wiki/how-to-install-google-assistant-on-windows-10/
 
 lifewire google assistant on windows
+
+
+
+
+
 
 
 
