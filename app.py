@@ -20,7 +20,7 @@ HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #s.connect((socket.gethostname(), 1243))
-s.connect(("127.0.0.1", 9000))
+s.connect(("192.168.1.11", 9000))
 
 
 # Flask app should start in global layout
@@ -81,17 +81,19 @@ def namesFunction(req, action):
     value = parameter.get("names")
     dummy = "1 \n"
     s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
-
-    responseList = ["Es un gusto" + value + ". Estoy acá porque vine a intentar entender cómo funcionan los humanos. Yo vengo de la galaxia Circinus, la conocés?", 
-    "¿"+ value +"?¡Que nombre tan genial! Estoy acá porque vine a intentar entender como piensan los humanos. Yo vengo de la galaxia  Circinus, la conocés?"]
-    response = responseList[(random.randrange(2))]
-
-    print("Response is: " + response)
     
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
+  
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Es un gusto" + value + "<break time='500ms'/>Estoy acá porque vine a intentar entender cómo funcionan los humanos. Yo vengo de la galaxia Circinus<break time='300ms'/> la conocés?</prosody></speak>"}]}}]}
 
+    jsonOut2 = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>¿" + value + "?.¡Que nombre tan genial!<break time='500ms'/> Estoy acá porque vine a intentar entender como piensan los humanos. Yo vengo de la galaxia Circinus<break time='300ms'/> la conocés?</prosody></speak>"}]}}]}
+
+    azar = random.randrange(2)
+    print(azar)
+    if azar == 0:
+    	return(jsonOut)
+    if azar == 1:
+    	return(jsonOut2)
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
-    return (jsonOut)
 
 
 def sportsFunction(req, action):
@@ -108,7 +110,7 @@ def sportsFunction(req, action):
     print("Response is: " + response)
     
     #SSML response bitch!
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+response+"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
