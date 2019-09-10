@@ -20,7 +20,7 @@ HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #s.connect((socket.gethostname(), 1243))
-s.connect(("192.168.1.11", 9000))
+s.connect(("10.4.100.181", 9000))
 
 
 # Flask app should start in global layout
