@@ -58,6 +58,12 @@ def parameterEvaluator(req):
     if action == "nameAction":
     	finalReply = namesFunction(req, action)
     	return(finalReply)
+    elif action == "siConoceAction":
+    	finalReply = siConoceFunction(req, action)
+    	return(finaReply)
+    elif action == "noConoceAction":
+    	finalReply = noConoceFunction(req, action)
+    	return(finalReply)
     elif action == "sportsAction":
         finalReply = sportsFunction(req, action)
         return(finalReply)
@@ -70,7 +76,6 @@ def parameterEvaluator(req):
     elif action == "fallbackAction":
         finalReply = fallbackFunction(req, action)
         return(finalReply)
-        
 
 
 # ----------------------------------- REPLY HANDLER
@@ -95,7 +100,27 @@ def namesFunction(req, action):
     	return(jsonOut2)
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
 
+def siConoceFunction(req, action):
+    result = req.get("queryResult")
+    parameter = result.get("parameters")
+    dummy = "1 \n"
+    s.send(dummy.encode())    
+  
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Wow<break time='300ms'/>Entonces debes saber que en Circinus nos encargamos de procesar información.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
 
+    return(jsonOut)
+   
+def noConoceFunction(req, action):
+    result = req.get("queryResult")
+    parameter = result.get("parameters")
+    dummy = "1 \n"
+    s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
+    
+  
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>No te preocupes.<break time='500ms'/>Sos del 99,9% de personas que no la conoce.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
+
+    return(jsonOut)
+    
 def sportsFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
