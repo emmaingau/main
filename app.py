@@ -33,27 +33,18 @@ appVersion = "EMMA alpha 0.2"
 def webhook():
     req = request.get_json(silent=True, force=True)
     userSaid = req.get("queryResult").get("queryText")
-    print('\n' + "NEW QUERY -----------------------------------------------------------------------------")
-    print("Request was: " + userSaid)
-
-
-    #print(json.dumps(req, indent=4))
-
     res = parameterEvaluator(req)
-
     res = json.dumps(res, indent=4)
-    print("END QUERY -----------------------------------------------------------------------------" + '\n')
     r = make_response(res)
-    #print("Details: " + str(r))
     r.headers['Content-Type'] = 'application/json'
     return r
+
 
 # ----------------------------------- PARAMETER EVALUATOR
 
 def parameterEvaluator(req):
 
     action = req.get("queryResult").get("action")
-    print(action + " detected")
     
     if action == "nameAction":
     	finalReply = namesFunction(req, action)
@@ -134,7 +125,6 @@ def sportsFunction(req, action):
     response = replyList[(random.randrange(3))]
     print("Response is: " + response)
     
-    #SSML response bitch!
     jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+response+"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
@@ -155,8 +145,8 @@ def sportsEstacionFunction(req, action):
         response = estacionesList[3]
 
     print("Response is: " + response)
-    
-    #SSML response bitch!
+
+
     jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
