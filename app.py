@@ -20,7 +20,7 @@ HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #s.connect((socket.gethostname(), 1243))
-s.connect(("127.0.0.1", 9000))
+s.connect(("192.168.1.11", 9000))
 
 
 # Flask app should start in global layout
@@ -51,7 +51,7 @@ def parameterEvaluator(req):
     	return(finalReply)
     elif action == "siConoceAction":
     	finalReply = siConoceFunction(req, action)
-    	return(finaReply)
+    	return(finalReply)
     elif action == "noConoceAction":
     	finalReply = noConoceFunction(req, action)
     	return(finalReply)
@@ -95,9 +95,9 @@ def siConoceFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
     dummy = "1 \n"
-    s.send(dummy.encode())    
+    s.send(dummy.encode())
   
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Wow<break time='300ms'/>Entonces debes saber que en Circinus nos encargamos de procesar información.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Wow<break time='300ms'>Entonces debes saber que en Circinus nos encargamos de procesar información.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
 
     return(jsonOut)
    
