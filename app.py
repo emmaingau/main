@@ -26,7 +26,7 @@ s.connect(("192.168.1.11", 9000))
 # Flask app should start in global layout
 app = Flask(__name__)
 
-appVersion = "EMMA alpha 0.2"
+appVersion = "EMMA alpha 1.0"
 
 @app.route('/webhook', methods=['POST'])
 
@@ -147,7 +147,7 @@ def sportsEstacionFunction(req, action):
     print("Response is: " + response)
 
 
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"<break time='400ms'/>En fin <break time='200ms'/> no me había dado cuenta de la hora,<break time='300ms'/> ya  tengo que  irme. gracias por venir a conocerme, y si querés podemos seguir en contacto a través de instagram<break time='200ms'/> nos vemos la proxima!</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
