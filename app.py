@@ -26,37 +26,34 @@ s.connect(("127.0.0.1", 9000))
 # Flask app should start in global layout
 app = Flask(__name__)
 
-appVersion = "EMMA alpha 0.2"
+appVersion = "EMMA alpha 1.0"
 
 @app.route('/webhook', methods=['POST'])
 
 def webhook():
     req = request.get_json(silent=True, force=True)
     userSaid = req.get("queryResult").get("queryText")
-    print('\n' + "NEW QUERY -----------------------------------------------------------------------------")
-    print("Request was: " + userSaid)
-
-
-    #print(json.dumps(req, indent=4))
-
     res = parameterEvaluator(req)
-
     res = json.dumps(res, indent=4)
-    print("END QUERY -----------------------------------------------------------------------------" + '\n')
     r = make_response(res)
-    #print("Details: " + str(r))
     r.headers['Content-Type'] = 'application/json'
     return r
+
 
 # ----------------------------------- PARAMETER EVALUATOR
 
 def parameterEvaluator(req):
 
     action = req.get("queryResult").get("action")
-    print(action + " detected")
     
     if action == "nameAction":
     	finalReply = namesFunction(req, action)
+    	return(finalReply)
+    elif action == "siConoceAction":
+    	finalReply = siConoceFunction(req, action)
+    	return(finalReply)
+    elif action == "noConoceAction":
+    	finalReply = noConoceFunction(req, action)
     	return(finalReply)
     elif action == "sportsAction":
         finalReply = sportsFunction(req, action)
@@ -70,7 +67,6 @@ def parameterEvaluator(req):
     elif action == "fallbackAction":
         finalReply = fallbackFunction(req, action)
         return(finalReply)
-        
 
 
 # ----------------------------------- REPLY HANDLER
@@ -95,7 +91,27 @@ def namesFunction(req, action):
     	return(jsonOut2)
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
 
+def siConoceFunction(req, action):
+    result = req.get("queryResult")
+    parameter = result.get("parameters")
+    dummy = "1 \n"
+    s.send(dummy.encode())
+  
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Wow<break time='300ms'>Entonces debes saber que en Circinus nos encargamos de procesar información.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
 
+    return(jsonOut)
+   
+def noConoceFunction(req, action):
+    result = req.get("queryResult")
+    parameter = result.get("parameters")
+    dummy = "1 \n"
+    s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
+    
+  
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>No te preocupes.<break time='500ms'/>Sos del 99,9% de personas que no la conoce.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
+
+    return(jsonOut)
+    
 def sportsFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
@@ -110,7 +126,6 @@ def sportsFunction(req, action):
     response = replyList[(random.randrange(3))]
     print("Response is: " + response)
     
-    #SSML response bitch!
     jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+response+"</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
@@ -132,14 +147,12 @@ def sportsEstacionFunction(req, action):
         response = estacionesList[3]
 
     print("Response is: " + response)
-    
-    #SSML response bitch!
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"</prosody></speak>"}]}}]}
+
+
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='default'>"+ response +"<break time='400ms'/>En fin <break time='200ms'/> no me había dado cuenta de la hora,<break time='300ms'/> ya  tengo que  irme. gracias por venir a conocerme, y si querés podemos seguir en contacto a través de instagram<break time='200ms'/> nos vemos la proxima!</prosody></speak>"}]}}]}
 
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
     return (jsonOut)
-
-
 
 def colorFunction(req, action):
     result = req.get("queryResult")
@@ -178,5 +191,4 @@ if __name__ == '__main__':
 
     app.run(debug=True, port=port, host='0.0.0.0')
     triggertest()
-
 
