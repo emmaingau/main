@@ -20,7 +20,7 @@ HEADERSIZE = 10
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #s.connect((socket.gethostname(), 1243))
-s.connect(("10.4.100.181", 9000))
+s.connect(("127.0.0.1", 9000))
 
 
 # Flask app should start in global layout
@@ -100,7 +100,8 @@ def sportsFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
     value = parameter.get("sportsName")
-    s.send(value.encode())
+    dummy = "2 \n"
+    s.send(dummy.encode())
     f = open("res/replylists/replySports.txt", "r")
     replyList = f.readlines()
     print(replyList)
@@ -119,7 +120,8 @@ def sportsEstacionFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
     value = parameter.get("estacionName")
-    s.send(value.encode())
+    dummy = "3 \n"
+    s.send(dummy.encode())
     if value == "verano":
         response = estacionesList[0]
     elif value == "otoño":
@@ -143,7 +145,7 @@ def colorFunction(req, action):
     result = req.get("queryResult")
     parameter = result.get("parameters")
     value = parameter.get("colorName")
-    dummy = "2 \n"
+    dummy = "4 \n"
     s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
     replyList = ["Respuesta custom para Color", 
                     "A mi también me gusta el "+ value, 
