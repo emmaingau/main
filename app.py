@@ -67,6 +67,9 @@ def parameterEvaluator(req):
     elif action == "fallbackAction":
         finalReply = fallbackFunction(req, action)
         return(finalReply)
+    elif action == "chauAction":
+    	 finalReply = chauFunction(req, action)
+    	 return(finalReply)
 
 
 # ----------------------------------- REPLY HANDLER
@@ -83,12 +86,16 @@ def namesFunction(req, action):
 
     jsonOut2 = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>¿" + value + "?.¡Que nombre tan genial!<break time='500ms'/> Estoy acá porque vine a intentar entender como piensan los humanos. Yo vengo de la galaxia Circinus<break time='300ms'/> la conocés?</prosody></speak>"}]}}]}
 
-    azar = random.randrange(2)
+    jsonOut3 = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>¿" + value + "?.Que nombre curioso. <break time='500ms'/> Vine a la Tierra en busca de nuevos conocimientos. Yo vengo de la galaxia Circinus<break time='300ms'/> la conocés?</prosody></speak>"}]}}]}
+
+    azar = random.randrange(3)
     print(azar)
     if azar == 0:
     	return(jsonOut)
     if azar == 1:
     	return(jsonOut2)
+    if azar == 2:
+    	return(jsonOut3)
     #jsonOut = {'fulfillmentText': response, 'DisplayText': response,}
 
 def siConoceFunction(req, action):
@@ -97,7 +104,7 @@ def siConoceFunction(req, action):
     dummy = "1 \n"
     s.send(dummy.encode())
   
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Wow<break time='300ms'>Entonces debes saber que en Circinus nos encargamos de procesar información.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Oh<break time='300ms'>Entonces debes saber que en Circinus nos encargamos de procesar información.<break time='500ms'/>Contame <break time='200ms'/>Vos trabajás <break time='200ms'/>o estudiás.</prosody></speak>"}]}}]}
 
     return(jsonOut)
    
@@ -179,7 +186,15 @@ def fallbackFunction(req, action):
 
     return (jsonOut)
 
-	
+
+def chauFunction(req, action):
+    response = fallbackList[random.randrange(3)]
+    print("Response is: " + response)
+    dummy = "8000 \n"
+    s.send(dummy.encode())
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><audio src='https://emmaingau.github.io/emmaingau/sound1.mp3'></audio></speak>"}]}}]}
+
+    return (jsonOut)	
 
 
 # ----------------------------------- STARTER
@@ -191,4 +206,3 @@ if __name__ == '__main__':
 
     app.run(debug=True, port=port, host='0.0.0.0')
     triggertest()
-
