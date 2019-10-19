@@ -62,7 +62,7 @@ def parameterEvaluator(req):
     	finalReply = estudioNoFunction(req, action)
     	return(finalReply)
     elif action == "niNiNoAction":
-    	finalReply = niniNoFunction(req, action)
+    	finalReply = niNiNoFunction(req, action)
     	return(finalReply)
     elif action == "trabajoEstudioNoAction":
     	finalReply = trabajoEstudioNoFunction(req, action)
@@ -117,7 +117,7 @@ def siCircinusFunction(req, action):
     dummy = "1 \n"
     s.send(dummy.encode())
   
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Vaya<break time='300ms'>Debes ser una de las pocas personas que conoce mi constelación.<break time='500ms'/> Allí nos dedicamos a procesar información que recolectamos de los planetas que vamos visitando. <break time='200ms'/> <break time='200ms'/> Me interesaría saber <break time='500ms'/> Trabajas o estudias?.</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'> Vaya. <break time='300ms'>Debes ser una de las pocas personas que conoce mi constelación.<break time='500ms'/> Allí nos dedicamos a procesar información que recolectamos de los planetas que vamos visitando. <break time='200ms'/> <break time='200ms'/> Me interesaría saber <break time='500ms'/> Trabajas o estudias?.</prosody></speak>"}]}}]}
 
     jsonOut2 = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Entonces debes saber que en Circinus nos encargamos de procesar información de los planetas que vamos recorriendo en el universo.<break time='500ms'/>Cuéntame <break time='200ms'/>Trabajas <break time='200ms'/>o estudias.</prosody></speak>"}]}}]}
 
@@ -138,7 +138,7 @@ def noCircinusFunction(req, action):
   
     jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>No te preocupes.<break time='500ms'/>Eres del 99,9% de personas que no la conocen.<break time='500ms'/> La vía láctea atraviesa Circinus. <break time='500ms'/> Allí <break time='200ms'/> funciona un puerto  de información donde nos encargamos de recibir y clasificar los datos de cada planeta que visitamos. <break time='500ms'/> Me interesa conocerte <break time='200ms'/>Tu trabajas <break time='200ms'/>o estudias.</prosody></speak>"}]}}]}
 
-    jsonOut2 = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'> Te cuento <break time='450ms'/> Circinus es una débil constelación por la que atraviesa la vía láctea. <break time='500ms'/> Allí <break time='200ms'/> nos encargamos de recolectar y procesar información de cada galaxia y sus respectivos planetas <break time='600ms'/> Me gustaría saber <break time='300ms'/> Tu trabajas <break time='200ms'/>o estudias.</prosody></speak>"}]}}]}
+    jsonOut2 = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'> Te cuento <break time='450ms'/> Circinus es una débil constelación por la que atraviesa la vía láctea. <break time='500ms'/> Allí, <break time='200ms'/> nos encargamos de recolectar y procesar información de cada galaxia y sus respectivos planetas. <break time='600ms'/> Me gustaría saber. <break time='300ms'/> Tu trabajas <break time='200ms'/>o estudias.</prosody></speak>"}]}}]}
 
     azar = random.randrange(2)
     print(azar)
@@ -154,9 +154,35 @@ def trabajoNoFunction(req, action):
     dummy = "2 \n"
     s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
 
-    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>Yo también!<break time='300ms'/>Casi todo el dia<break time='200ms'/>por eso cuando tengo tiempo libre, aprovecho para apagar mis sistemas<break time='300ms'/>vos también sos de descansar en esos ratos<break time='200ms'/>o preferís hacer deporte</prosody></speak>"}]}}]}
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'> Yo también! <break time='300ms'/> Casi todo el día<break time='500ms'/>Una vez que vuelvo a Circinus tengo el equivalente a un mes humano de descanso. <break time='600ms'/> Generalmente, <break time='350ms'/> utilizo ese tiempo para apagar mis sistemas o para sintonizar algún canal de televisión de un planeta distante. <break time='450ms'/> Tengo entendido que los terrícolas, <break time='400ms'/> en algunos casos, <break time='350ms'/> prefieren realizar actividad física en lugar de descansar. <break time='650ms'/> ¿Tú qué prefieres hacer en tus tiempos libres? <break time='500ms'/> hacer deporte <break time='302ms'/> o relajarte. </prosody></speak>"}]}}]}
+
+    print(value)
+    return(jsonOut)
+
+def estudioNoFunction(req, action):
+    result = req.get("queryResult")
+    parameter = result.get("parameters")
+    value = parameter.get("ocupacion")
+    dummy = "2 \n"
+    s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
+
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'>¡Qué bien!<break time='500ms'/> ¡Estudiar te abre muchas puertas! <break time='550ms'/> Es la actividad fundamental para la evolución del universo. <break time='400ms'/> Sin embargo<break time='200ms'/> me han dicho que no te deja tener mucho tiempo libre. <break time='500ms'/> En esos ratos. <break time='150ms'/> prefieres descansar. <break time='250ms'/> o hacer algún deporte </prosody></speak>"}]}}]}
 
     return(jsonOut)
+    print(value)
+
+def niNiNoFunction(req, action):
+    result = req.get("queryResult")
+    parameter = result.get("parameters")
+    value = parameter.get("ocupacion")
+    dummy = "3 \n"
+    s.send(dummy.encode())#s.send(value.encode())  #te mando a Processing solo el valor importante
+
+    jsonOut = {"fulfillmentMessages": [{"platform": "ACTIONS_ON_GOOGLE","simpleResponses": {"simpleResponses":[{"ssml": "<speak><prosody rate='medium' pitch='1st'> ¡Vaya! <break time='500ms'/> Debe ser muy liberador tener bastante tiempo libre.<break time='200ms'/> O no <break time='500ms'/> Quizá tengas muchas cosas por hacer <break time='200ms'/> pero sin necesariamente entrar en la categorìa de trabajo o estudio. Creo que es importante llevar una vida proactiva, pero considero que es aún más importante saber cuando parar.  </prosody></speak>"}]}}]}
+
+    return(jsonOut)
+    print(value)
+
 
 def sportsFunction(req, action):
     result = req.get("queryResult")
