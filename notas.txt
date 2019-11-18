@@ -1,6 +1,0 @@
-si el usuario dice: 
-	- me tengo que ir (tener un gateway)
-	- Cuando le pregunta qué deporte practica, puede ser que le diga que sale a caminar o correr o bicicleta. o que va al gym (esto hay que preverlo)
-
-
-corregir nombres (ejemplo, ponerle tilde a Martin, agregar pila de nombres que falten eugenia, maría)
